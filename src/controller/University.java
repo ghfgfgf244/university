@@ -1,17 +1,20 @@
 package controller;
 
 import java.util.Scanner;
+import model.StudentManage;
+import model.Utils;
 import view.Menu;
 
 public class University extends Menu<String> {
 
     static Scanner sc = new Scanner(System.in);
-    static String[] menu = {"Add student ","Print student (Name and GPA) ","Sort student by name ","Quantity students have same city ","Update ","Delete ","Report ","Exit "};
+    static String[] menu = {"Add student ", "Print student (Name and GPA) ", "Sort student by name ", "Quantity students have same city ", "Update / Delete ", "Report ", "Exit "};
     static String fName = "\\university.txt";
+    StudentManage sm = new StudentManage();
 
     public University() {
         super("UNIVERSITY MANAGE", menu);
-
+        StudentManage.loadData(fName);
     }
 
     @Override
@@ -21,24 +24,21 @@ public class University extends Menu<String> {
                 addNewStudent();
             }
             case 2 -> {
-
+                StudentManage.printStudentByNameAndGPA();
             }
             case 3 -> {
-
+                StudentManage.sortAndPrintByName();
             }
             case 4 -> {
-
+                StudentManage.countStuSameCity();
             }
             case 5 -> {
-
+                updateOrDelete();
             }
             case 6 -> {
-
+                StudentManage.reportStuPassed();
             }
             case 7 -> {
-
-            }
-            case 8 -> {
                 System.out.println("Exiting...");
             }
             default ->
@@ -52,8 +52,36 @@ public class University extends Menu<String> {
         uni.run();
     }
 
-    private void addNewStudent() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void addNewStudent() {
+        System.out.print("Do you want to add IT student (1) or BIZ student (2) ? Input your choose: ");
+        int choose = sc.nextInt();
+        do {
+            if (choose == 1 || choose == 2) {
+                StudentManage.addStu(choose);
+            }
+        } while (false);
+
+        StudentManage.saveData(fName);
+        StudentManage.printList();
+    }
+
+    public static void updateOrDelete() {
+        char choose = 0;
+        do {
+            choose = Utils.getAndValidValue("Do you want to update (U) or delete (D) student ? ", "^[U|D]$", "Only input chars: U or D. Please choose again.").charAt(0);
+            switch (choose) {
+                case 'U' -> {
+                    StudentManage.updateStu();
+                }
+                case 'D' -> {
+                    StudentManage.deleteStu();
+                }
+                default ->
+                    System.out.println("Invalid choice. Please choose again.");
+            }
+        } while (false);
+        StudentManage.saveData(fName);
+        StudentManage.printList();
     }
 
 }

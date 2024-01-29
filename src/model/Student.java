@@ -50,13 +50,9 @@ public class Student {
         this.address = address;
     }
 
-    public void calScoreAve() {
-
-    }
-
     @Override
     public String toString() {
-        return String.format("%-10s | %-15s | %-10.2f | %-10s ",
+        return String.format("%-10s | %-15s | %-10.2f | %-20s ",
                 ID, fullName, aveScore, address);
     }
 

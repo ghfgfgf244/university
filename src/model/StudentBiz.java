@@ -5,15 +5,13 @@ public class StudentBiz extends Student {
     protected double accountingScore;
     protected double marketingScore;
 
-    public StudentBiz(double accountingScore, double marketingScore, String ID, String fullName, double aveScore, Address address) {
+    public StudentBiz(String ID, String fullName, double aveScore, Address address,double accountingScore, double marketingScore) {
         super(ID, fullName, aveScore, address);
         this.accountingScore = accountingScore;
         this.marketingScore = marketingScore;
     }
 
-    public StudentBiz(double accountingScore, double marketingScore) {
-        this.accountingScore = accountingScore;
-        this.marketingScore = marketingScore;
+    public StudentBiz() {
     }
 
     public double getAccountingScore() {
@@ -32,15 +30,14 @@ public class StudentBiz extends Student {
         this.marketingScore = marketingScore;
     }
 
-    @Override
-    public void calScoreAve() {
-        setAveScore((getAccountingScore() * 2 + getMarketingScore()) / 3);
+    public double calScoreAve(double accountingScore, double marketingScore) {
+        return((accountingScore * 2 + marketingScore) / 3);
     }
 
     @Override
     public String toString() {
-        return String.format(super.toString(),"%-10.2f | %-10.2f ",
-                accountingScore, marketingScore);
+        return String.format("%-10s | %-15s | %-20s | %-10.2f | %-10.2f | %-10.2f ",
+                ID, fullName, address,accountingScore, marketingScore, aveScore);
     }
 
 }

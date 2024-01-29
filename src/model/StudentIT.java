@@ -5,7 +5,7 @@ public class StudentIT extends Student {
     protected double javaScore;
     protected double cssScore;
 
-    public StudentIT(double javaScore, double cssScore, String ID, String fullName, double aveScore, Address address) {
+    public StudentIT(String ID, String fullName, double aveScore, Address address, double javaScore, double cssScore) {
         super(ID, fullName, aveScore, address);
         this.javaScore = javaScore;
         this.cssScore = cssScore;
@@ -31,15 +31,15 @@ public class StudentIT extends Student {
         this.cssScore = cssScore;
     }
 
-    @Override
-    public void calScoreAve() {
-        setAveScore((3 * getJavaScore() + getCssScore()) / 4);
+    
+    public double calScoreAve(double javaScore, double cssScore) {
+        return ((3 * javaScore + cssScore) / 4);
     }
 
     @Override
     public String toString() {
-        return String.format(super.toString(),"%-10.2f | %-10.2f ",
-                javaScore, cssScore);
+        return String.format("%-10s | %-15s | %-20s | %-10.2f | %-10.2f | %-10.2f ",
+                ID, fullName, address,javaScore, cssScore, aveScore);
     }
 
 }

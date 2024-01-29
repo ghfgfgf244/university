@@ -2,16 +2,16 @@ package model;
 
 public class Address {
 
-    protected String country;
-    protected String city;
-    protected String district;
     protected String street;
+    protected String district;
+    protected String city;
+    protected String country;
 
-    public Address(String country, String city, String district, String street) {
-        this.country = country;
-        this.city = city;
-        this.district = district;
+    public Address(String street, String district, String city, String country) {
         this.street = street;
+        this.district = district;
+        this.city = city;
+        this.country = country;
     }
 
     public Address() {
@@ -52,8 +52,8 @@ public class Address {
 
     @Override
     public String toString() {
-        return String.format("%-10s | %-10s | %-10s | %-10s ",
-                country, city, district, street);
+        return String.format("%-20s | %-20s | %-20s | %-20s ",
+                street, district,city, country);
     }
 
 }
